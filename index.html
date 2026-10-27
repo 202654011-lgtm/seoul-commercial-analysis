@@ -6,106 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>서울시 생활인구 기반 상가 공급 분석</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <style>
-    :root {
-      --navy: #132d4e;
-      --blue: #2563eb;
-      --bg: #f3f6fb;
-      --line: #e2e8f0;
-      --muted: #64748b;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: "Malgun Gothic", Arial, sans-serif;
-      background: var(--bg);
-      color: #1e293b;
-      line-height: 1.6;
-    }
-    header {
-      background: linear-gradient(120deg,#102946,#20598d);
-      color: white;
-      padding: 55px 22px 48px;
-      text-align: center;
-    }
-    header h1 { margin: 8px 0 12px; font-size: clamp(24px,4vw,36px); }
-    header p { color: #d8e7f7; margin: 0; }
-    .eyebrow { color: #9bd4ff; font-size: 13px; letter-spacing: 2px; font-weight: bold; }
-    main { max-width: 1250px; margin: 28px auto; padding: 0 18px; }
-    .summary {
-      display: grid;
-      grid-template-columns: repeat(4,minmax(0,1fr));
-      gap: 15px;
-      margin-bottom: 24px;
-    }
-    .card, .panel {
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: 15px;
-      box-shadow: 0 5px 22px rgba(22,45,75,.04);
-    }
-    .card { padding: 21px; }
-    .card .label { font-size: 13px; color: var(--muted); }
-    .card .value { font-size: clamp(21px,3vw,30px); font-weight: 800; margin-top: 8px; color: var(--navy); }
-    .card .hint { font-size: 12px; color: var(--muted); }
-    .panel { padding: 25px; margin-bottom: 23px; }
-    h2 { font-size: 21px; margin: 0 0 8px; }
-    h3 { margin: 0 0 12px; }
-    .sub { color: var(--muted); font-size: 14px; margin: 0 0 18px; }
-    .layout {
-      display: grid;
-      grid-template-columns: minmax(0,1.65fr) minmax(290px,1fr);
-      gap: 20px;
-    }
-    #map { height: 530px; width: 100%; border-radius: 12px; background: #e9eff5; }
-    .legend {
-      background: white;
-      padding: 12px 14px;
-      border-radius: 9px;
-      box-shadow: 0 2px 12px #0002;
-      font-size: 12px;
-      line-height: 1.8;
-    }
-    .legend-line { display: flex; align-items: center; gap: 8px; }
-    .swatch { display: inline-block; width: 13px; height: 13px; border-radius: 3px; flex-shrink: 0; }
-    .details { background: #f7faff; padding: 18px; border-radius: 11px; min-height: 150px; }
-    .details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .metric { padding: 12px; background: white; border-radius: 9px; border: 1px solid var(--line); }
-    .metric small { display: block; color: var(--muted); }
-    .metric strong { display: block; font-size: 17px; margin-top: 3px; }
-    .status { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 12px; background: #fee2e2; color: #991b1b; }
-    .chart-row { display: grid; grid-template-columns: 60px 1fr 70px; align-items: center; gap: 12px; margin: 16px 0; font-size: 14px; }
-    .bar-bg { background: #edf2f7; height: 23px; border-radius: 5px; overflow: hidden; }
-    .bar { height: 100%; background: #e66b65; border-radius: 5px; }
-    .chart-row:first-child .bar { background: #b91c1c; }
-    .table-wrap { overflow-x: auto; }
-    table { border-collapse: collapse; width: 100%; min-width: 650px; font-size: 14px; }
-    th { background: var(--navy); color: white; padding: 13px; text-align: center; }
-    td { padding: 12px; border-bottom: 1px solid var(--line); text-align: center; }
-    tbody tr { cursor: pointer; }
-    tbody tr:hover { background: #eff6ff; }
-    tbody tr.shortage { background: #fff4f2; }
-    .method-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 15px; }
-    .method-box { background: #f7faff; padding: 18px; border-radius: 10px; }
-    .method-box strong { display: block; margin-bottom: 7px; }
-    .formula { padding: 18px; background: #edf5ff; border-radius: 10px; font-weight: bold; text-align: center; margin: 18px 0; }
-    .notice { color: #7c4a18; background: #fff8e8; border-radius: 10px; padding: 14px 17px; font-size: 13px; }
-    .conclusion { border-left: 4px solid #2563eb; padding: 12px 18px; background: #f1f6ff; border-radius: 7px; }
-    footer { text-align: center; background: #132d4e; color: #cbd5e1; padding: 30px 15px; font-size: 13px; }
-    .error { color: #b91c1c; padding: 15px; }
-    @media (max-width: 850px) {
-      .layout { grid-template-columns: 1fr; }
-      .summary { grid-template-columns: repeat(2,minmax(0,1fr)); }
-      .method-grid { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 500px) {
-      .panel { padding: 17px; }
-      #map { height: 390px; }
-      .summary { gap: 9px; }
-      .card { padding: 14px; }
-      .chart-row { grid-template-columns: 52px 1fr 60px; gap: 8px; font-size: 12px; }
-    }
-  </style>
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 <header>
@@ -124,8 +25,14 @@
 
   <section class="layout">
     <div class="panel">
-      <h2>자치구별 상가 공급 수준</h2>
-      <p class="sub">붉은색에 가까울수록 생활인구 대비 상가 수가 상대적으로 적습니다. 지도를 클릭해 보세요.</p>
+      <h2 id="map-title">자치구별 상가 공급 수준</h2>
+       <div class="mode-switch" role="group" aria-label="분석 시간대 선택">
+         <button type="button" class="mode-btn active" data-mode="total" aria-pressed="true">전체</button>
+         <button type="button" class="mode-btn" data-mode="day" aria-pressed="false">주간</button>
+         <button type="button" class="mode-btn" data-mode="night" aria-pressed="false">야간</button>
+         <button type="button" class="mode-btn" data-mode="diff" aria-pressed="false">주간·야간 차이</button>
+       </div>
+      <p class="sub" id="map-description">붉은색에 가까울수록 생활인구 대비 상가 수가 상대적으로 적습니다. 지도를 클릭해 보세요.</p>
       <div id="map"></div>
     </div>
     <div class="panel">
@@ -136,18 +43,18 @@
   </section>
 
   <section class="panel">
-    <h2>상대적 공급 부족 상위 5개 자치구</h2>
-    <p class="sub">생활인구 1만 명당 상가 수가 적은 순서입니다. 막대가 길수록 공급 지표가 높습니다.</p>
+    <h2 id="chart-title">상대적 공급 부족 상위 5개 자치구</h2>
+    <p class="sub" id="chart-description">생활인구 1만 명당 상가 수가 적은 순서입니다. 막대가 길수록 공급 지표가 높습니다.</p>
     <div id="shortage-chart"></div>
   </section>
 
   <section class="panel">
-    <h2>서울시 25개 자치구 공급 순위</h2>
-    <p class="sub">1위는 생활인구 대비 상가 수가 가장 적은 자치구입니다. 행을 클릭하면 지도에서 해당 지역을 확인할 수 있습니다.</p>
+    <h2 id="ranking-title">서울시 25개 자치구 공급 순위</h2>
+    <p class="sub" id="ranking-description">1위는 생활인구 대비 상가 수가 가장 적은 자치구입니다. 행을 클릭하면 지도에서 해당 지역을 확인할 수 있습니다.</p>
     <div class="table-wrap">
       <table>
         <thead>
-          <tr><th>순위</th><th>자치구</th><th>상가 수</th><th>평균 생활인구</th><th>1만 명당 상가 수</th></tr>
+          <tr><th>순위</th><th>자치구</th><th>상가 수</th><th>평균 생활인구</th><th id="ranking-metric-heading">1만 명당 상가 수</th></tr>
         </thead>
         <tbody id="ranking-body"></tbody>
       </table>
@@ -159,11 +66,11 @@
     <p class="sub">QGIS 및 PyQGIS로 공간·통계 데이터를 결합하고, GitHub Pages에서 분석 결과를 시각화했습니다.</p>
     <div class="method-grid">
       <div class="method-box"><strong>① 상가 정보</strong>소상공인시장진흥공단 상가(상권)정보, 서울, 2026년 6월. 자치구별 상가 수 집계.</div>
-      <div class="method-box"><strong>② 생활인구</strong>서울시 생활인구 자료, 2026년 6월. 자치구별 일평균 생활인구 산출.</div>
+      <div class="method-box"><strong>② 생활인구</strong>서울시 생활인구 자료, 2026년 6월. 자치구별 일평균 및 주간·야간 평균 생활인구 산출.</div>
       <div class="method-box"><strong>③ 공간 경계</strong>SGIS 2025년 행정구역 경계. 자치구 이름을 기준으로 데이터 결합.</div>
     </div>
-    <div class="formula">상가 공급 지표 = (자치구 상가 수 ÷ 자치구 평균 생활인구) × 10,000</div>
-    <div class="notice">주의: 이 지표는 생활인구 대비 상가의 상대적 공급 수준을 나타냅니다. 실제 상권의 매출, 폐업률, 업종 구성, 접근성 또는 상가 수요를 직접 측정하지 않으므로, 공급 지표가 낮다는 이유만으로 해당 지역을 취약 상권이라고 단정할 수 없습니다.</div>
+    <div class="formula">전체·주간·야간 공급 지표 = (자치구 상가 수 ÷ 해당 시간대 평균 생활인구) × 10,000<br>주간·야간 차이 = 주간 공급 지표 − 야간 공급 지표</div>
+    <div class="notice">시간대 비교는 동일한 2026년 6월 자료에서 주간과 야간을 구분한 분석입니다. 두 연도 간 변화 분석이 아닙니다.<br>주의: 이 지표는 생활인구 대비 상가의 상대적 공급 수준을 나타냅니다. 실제 상권의 매출, 폐업률, 업종 구성, 접근성 또는 상가 수요를 직접 측정하지 않으므로, 공급 지표가 낮다는 이유만으로 해당 지역을 취약 상권이라고 단정할 수 없습니다.</div>
   </section>
 
   <section class="panel">
@@ -183,201 +90,6 @@
 </footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script>
-"use strict";
-
-const PATH = {
-  geojson: "./data/seoul_shop_supply.geojson",
-  ranking: "./data/seoul_shop_supply_ranking.csv"
-};
-const TOP_N = 5;
-const colors = ["#b91c1c","#ef8354","#f5d36b","#9dcbb3","#287d74"];
-const fmt = (v, d=0) => Number(v).toLocaleString("ko-KR", {maximumFractionDigits:d});
-const escapeHTML = v => String(v ?? "").replace(/[&<>"']/g, c =>
-  ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])
-);
-
-function parseCSV(text) {
-  const rows = [];
-  let row = [], cell = "", quoted = false;
-  for (let i=0;i<text.length;i++) {
-    const c = text[i];
-    if (c === '"') {
-      if (quoted && text[i+1] === '"') {cell += '"';i++;}
-      else quoted = !quoted;
-    } else if (c === "," && !quoted) {
-      row.push(cell);cell="";
-    } else if ((c === "\n" || c === "\r") && !quoted) {
-      if (c === "\r" && text[i+1] === "\n") i++;
-      row.push(cell);cell="";
-      if (row.some(x => x.trim())) rows.push(row);
-      row=[];
-    } else cell+=c;
-  }
-  row.push(cell);
-  if (row.some(x => x.trim())) rows.push(row);
-  if (!rows.length) return [];
-  const headers = rows.shift().map(x => x.replace(/^\uFEFF/,"").trim());
-  return rows.map(values => Object.fromEntries(headers.map((h,i)=>[h,values[i] ?? ""])));
-}
-
-async function main() {
-  if (typeof L === "undefined") throw new Error("지도 라이브러리를 불러오지 못했습니다.");
-  const responses = await Promise.all([fetch(PATH.geojson),fetch(PATH.ranking)]);
-  if (responses.some(r => !r.ok)) throw new Error("data 폴더의 GeoJSON 또는 CSV 파일을 확인해 주세요.");
-
-  const geojson = await responses[0].json();
-  const raw = parseCSV(await responses[1].text());
-  const rows = raw.map(r => ({
-    DISTRICT: String(r.DISTRICT ?? "").trim(),
-    RANK: Number(r.RANK),
-    SHOP_COUNT: Number(r.SHOP_COUNT),
-    POP_TOTAL: Number(r.POP_TOTAL),
-    POP_DAY: Number(r.POP_DAY),
-    POP_NIGHT: Number(r.POP_NIGHT),
-    SHOP_PER_10K: Number(r.SHOP_PER_10K)
-  })).sort((a,b) => a.RANK-b.RANK);
-
-  if (!rows.length || !geojson.features?.length) throw new Error("분석 데이터가 비어 있습니다.");
-  if (rows.some(r => !r.DISTRICT || !Number.isFinite(r.SHOP_PER_10K) || r.POP_TOTAL <= 0)) {
-    throw new Error("CSV 열 이름이나 분석 지표를 확인해 주세요.");
-  }
-
-  const byName = new Map(rows.map(r => [r.DISTRICT,r]));
-  const totalShops = rows.reduce((s,r)=>s+r.SHOP_COUNT,0);
-  const totalPop = rows.reduce((s,r)=>s+r.POP_TOTAL,0);
-  const citySupply = totalShops/totalPop*10000;
-  const values = rows.map(r=>r.SHOP_PER_10K).sort((a,b)=>a-b);
-
-  // 순위 기반 5단계: 25개 구라면 각 단계에 5개 구가 포함됩니다.
-  function level(row) {
-    if (!row) return -1;
-    const index = rows.findIndex(r => r.DISTRICT === row.DISTRICT);
-    return Math.min(4,Math.floor(index / Math.ceil(rows.length/5)));
-  }
-
-  document.getElementById("district-count").textContent = rows.length+"개";
-  document.getElementById("shortage-count").textContent = Math.min(TOP_N,rows.length)+"개";
-  document.getElementById("total-shops").textContent = fmt(totalShops);
-  document.getElementById("avg-supply").textContent = fmt(citySupply,2)+"개";
-
-  const top = rows.slice(0,TOP_N);
-  const maxSupply = Math.max(...top.map(r=>r.SHOP_PER_10K));
-  document.getElementById("shortage-chart").innerHTML = top.map(r => `
-    <div class="chart-row">
-      <strong>${escapeHTML(r.DISTRICT)}</strong>
-      <div class="bar-bg"><div class="bar" style="width:${100*r.SHOP_PER_10K/maxSupply}%"></div></div>
-      <strong>${fmt(r.SHOP_PER_10K,2)}개</strong>
-    </div>`).join("");
-
-  document.getElementById("conclusion-text").textContent =
-    `생활인구 1만 명당 상가 수 기준, ${top.map(r=>r.DISTRICT).join("·")}가 `+
-    `상대적 공급 부족 상위 ${top.length}개 자치구로 나타났습니다. `+
-    `이 지역들은 추가적인 생활권 상업시설 수요 조사를 위한 후보 지역입니다.`;
-
-  const map = L.map("map",{scrollWheelZoom:false});
-  const layers = new Map();
-  let selected = null;
-
-  function getName(feature) {
-    return String(feature.properties?.SIGUNGU_NM ?? "").trim();
-  }
-
-  function style(feature) {
-    const r = byName.get(getName(feature));
-    return {
-      color:"#ffffff",weight:1.5,
-      fillColor:colors[level(r)] ?? "#cbd5e1",
-      fillOpacity:.88
-    };
-  }
-
-  const geoLayer = L.geoJSON(geojson,{
-    style,
-    onEachFeature(feature,layer) {
-      const name = getName(feature);
-      const r = byName.get(name);
-      layer.bindTooltip(name || "지역명 없음",{sticky:true});
-      if (r) layers.set(name,layer);
-      layer.on("mouseover",()=>{if(selected!==layer)layer.setStyle({weight:3,color:"#334155"});});
-      layer.on("mouseout",()=>{if(selected!==layer)geoLayer.resetStyle(layer);});
-      layer.on("click",()=>selectDistrict(name));
-    }
-  }).addTo(map);
-
-  map.fitBounds(geoLayer.getBounds(),{padding:[20,20]});
-
-  function selectDistrict(name) {
-    const r = byName.get(name);
-    const box = document.getElementById("district-details");
-    if (!r) {
-      box.textContent = name+" 지역의 분석 데이터를 찾지 못했습니다.";
-      return;
-    }
-    if (selected) geoLayer.resetStyle(selected);
-    selected = layers.get(name) ?? null;
-    if (selected) {
-      selected.setStyle({color:"#172554",weight:4,fillOpacity:1});
-      selected.bringToFront();
-    }
-
-    const shortage = r.RANK <= TOP_N;
-    box.innerHTML = `
-      <h3>${escapeHTML(name)}</h3>
-      <p><span class="status">${shortage?"상대적 공급 부족 상위 5개":"공급 수준 비교 대상"}</span></p>
-      <div class="details-grid">
-        <div class="metric"><small>공급 부족 순위</small><strong>${fmt(r.RANK)} / ${rows.length}위</strong></div>
-        <div class="metric"><small>1만 명당 상가</small><strong>${fmt(r.SHOP_PER_10K,2)}개</strong></div>
-        <div class="metric"><small>상가 수</small><strong>${fmt(r.SHOP_COUNT)}개</strong></div>
-        <div class="metric"><small>평균 생활인구</small><strong>${fmt(r.POP_TOTAL,1)}명</strong></div>
-        <div class="metric"><small>주간 생활인구</small><strong>${fmt(r.POP_DAY,1)}명</strong></div>
-        <div class="metric"><small>야간 생활인구</small><strong>${fmt(r.POP_NIGHT,1)}명</strong></div>
-      </div>
-      <p style="font-size:13px;color:#64748b;margin-bottom:0">
-      서울시 통합 공급 지표: ${fmt(citySupply,2)}개 / 1만 명
-      </p>`;
-  }
-
-  const legend = L.control({position:"bottomright"});
-  legend.onAdd = () => {
-    const div = L.DomUtil.create("div","legend");
-    div.innerHTML = "<strong>상대적 상가 공급 수준</strong>"+
-      ["매우 낮음","낮음","보통","높음","매우 높음"]
-      .map((label,i)=>`<div class="legend-line"><span class="swatch" style="background:${colors[i]}"></span>${label}</div>`).join("")+
-      "<small>25개 구를 공급 순위별 5개씩 분류</small>";
-    return div;
-  };
-  legend.addTo(map);
-
-  const tbody = document.getElementById("ranking-body");
-  rows.forEach(r => {
-    const tr = document.createElement("tr");
-    if (r.RANK <= TOP_N) tr.className = "shortage";
-    [r.RANK,r.DISTRICT,fmt(r.SHOP_COUNT),fmt(r.POP_TOTAL,1),fmt(r.SHOP_PER_10K,2)]
-      .forEach(v => {
-        const td=document.createElement("td");
-        td.textContent=v;
-        tr.appendChild(td);
-      });
-    tr.addEventListener("click",()=>{
-      selectDistrict(r.DISTRICT);
-      const layer=layers.get(r.DISTRICT);
-      if (layer) {
-        map.fitBounds(layer.getBounds(),{padding:[40,40],maxZoom:12});
-        document.getElementById("map").scrollIntoView({behavior:"smooth",block:"center"});
-      }
-    });
-    tbody.appendChild(tr);
-  });
-
-  if (top.length) selectDistrict(top[0].DISTRICT);
-}
-
-main().catch(error=>{
-  console.error(error);
-  document.getElementById("district-details").innerHTML =
-    `<div class="error">데이터 로딩 오류: ${escapeHTML(error.message)}</div>`;
-});
-</script>
+<script src="./script.js"></script>
 </body>
 </html>
